@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #111;
+  color: white;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 30%;
+  background: #1c1c1c;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.channel {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #333;
+}
+
+.channel:hover {
+  background: #333;
+}
+
+.channel img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.player {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+video {
+  width: 90%;
+  max-height: 70vh;
+  background: black;
+}
