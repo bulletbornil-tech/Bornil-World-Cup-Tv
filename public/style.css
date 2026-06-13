@@ -1,86 +1,33 @@
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #0b0b0f;
-  color: white;
-}
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bornil World Cup TV</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-/* HEADER */
-.header {
-  padding: 20px;
-  text-align: center;
-  background: linear-gradient(90deg, #e50914, #ff2e63);
-}
+<body>
 
-.header h1 {
-  margin: 0;
-  font-size: 30px;
-  letter-spacing: 3px;
-}
+<header>
+  <h1>🔥 BORNIL WORLD CUP TV 🔥</h1>
+  <p>Live Sports Streaming</p>
+</header>
 
-/* SEARCH BAR */
-.search {
-  text-align: center;
-  padding: 10px;
-}
+<!-- 🔥 VIDEO PLAYER TOP -->
+<div class="player-box">
+  <video id="video" controls></video>
+</div>
 
-.search input {
-  width: 60%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-}
+<!-- SEARCH -->
+<div class="search">
+  <input type="text" placeholder="Search channel..." oninput="searchChannel(this.value)">
+</div>
 
-/* MAIN */
-.container {
-  display: flex;
-  height: 85vh;
-}
+<!-- CHANNEL LIST BELOW -->
+<div class="channels" id="channels"></div>
 
-/* CHANNEL GRID */
-.channels {
-  width: 35%;
-  overflow-y: auto;
-  padding: 10px;
-  background: #141414;
-}
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="app.js"></script>
 
-.channel {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  margin-bottom: 8px;
-  background: #1f1f1f;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.channel:hover {
-  background: #333;
-}
-
-.channel img {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
-}
-
-/* PLAYER */
-.player {
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: black;
-}
-
-/* 🔥 FIX VIDEO STRETCH ISSUE */
-video {
-  width: 100%;
-  max-height: 80vh;
-  aspect-ratio: 16 / 9;
-  border-radius: 12px;
-}
+</body>
+</html>
