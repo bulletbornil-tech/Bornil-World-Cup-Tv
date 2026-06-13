@@ -1,27 +1,58 @@
-const list = document.getElementById("channelList");
-const video = document.getElementById("videoPlayer");
+let channels = [];
 
-fetch("/channels.json")
-  .then(res => res.json())
-  .then(data => {
-    data.forEach(channel => {
-      const div = document.createElement("div");
-      div.className = "channel";
+async function loadChannels() {
+  const res = await fetch("/api/channels");
+  channels = await res.json();
 
-      div.innerHTML = `
-        <img src="${channel.logo}" />
-        <span>${channel.name}</span>
-      `;
+  renderChannels(channels);
+}
 
-      div.onclick = () => {
-        video.src = channel.stream_url;
-        video.play();
-      };
+function renderChannels(list) {
+  const box = document.querySelector(".channels");
+  box.innerHTML = "";
 
-      list.appendChild(div);
-    });
-  })
-  .catch(err => {
-    list.innerHTML = "Channels load failed!";
-    console.log(err);
+  list.forEach(ch => {
+    const div = document.createElement("div");
+    div.className = "channel";
+
+    div.innerHTML = `
+      <img src="${ch.logo}">
+      <div>${ch.name}</div>
+    `;
+
+    div.onclick = () => playChannel(ch.stream_url);
+
+    box.appendChild(div);
   });
+}
+
+/* SEARCH */
+function searchChannel(value) {
+  const filtered = channels.filter(ch =>
+    ch.name.toLowerCase().includes(value.toLowerCase())
+  );
+
+  renderChannels(filtered);
+}
+
+/* PLAYER (HLS FIX) */
+function playChannel(url) {
+  const video = document.getElementById("video");
+
+  if (Hls.isSupported()) {
+    if (window.hls) window.hls.destroy();
+
+    const hls = new Hls();
+    window.hls = hls;
+
+    hls.loadSource(url);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      video.play();
+    });
+  } else {
+    video.src = url;
+  }
+}
+
+window.onload = loadChannels;
