@@ -1,9 +1,21 @@
 let channels = [];
 
 async function loadChannels() {
-  const res = await fetch("/channels.json");
-  channels = await res.json();
-  renderChannels(channels);
+  try {
+    const res = await fetch("/channels.json");
+
+    if (!res.ok) {
+      throw new Error("Cannot load channels.json");
+    }
+
+    channels = await res.json();
+    renderChannels(channels);
+
+  } catch (err) {
+    console.log(err);
+    document.getElementById("channels").innerHTML =
+      "❌ Channels load failed";
+  }
 }
 
 function renderChannels(list) {
