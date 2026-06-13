@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Bornil World Cup TV</title>
-
-  <link rel="stylesheet" href="style.css"/>
-
-  <!-- HLS player support -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <header>
-    <h1>🏆 Bornil World Cup TV</h1>
-    <input type="text" id="search" placeholder="Search channel..."/>
-  </header>
+  <div class="header">
+    Bornil World Cup TV
+  </div>
 
-  <main>
+  <div class="container">
 
-    <section class="player-section">
+    <div class="sidebar">
+      <h3>Select Your Channel</h3>
+      <div id="channelList"></div>
+    </div>
+
+    <div class="player">
       <video id="videoPlayer" controls autoplay></video>
-      <div id="nowPlaying">Select a channel</div>
-    </section>
+    </div>
 
-    <section id="channelList" class="grid"></section>
-
-  </main>
+  </div>
 
   <script src="app.js"></script>
 </body>
