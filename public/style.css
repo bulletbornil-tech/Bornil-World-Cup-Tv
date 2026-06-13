@@ -1,75 +1,53 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial;
   background: #0b0b0b;
   color: white;
 }
 
-header {
-  padding: 15px;
-  background: #111;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  font-size: 18px;
-  color: gold;
-}
-
-#search {
-  padding: 8px;
-  width: 180px;
-  border-radius: 5px;
-  border: none;
-}
-
-.player-section {
+.header {
   text-align: center;
-  padding: 10px;
-}
-
-video {
-  width: 90%;
-  max-width: 800px;
-  border-radius: 10px;
+  padding: 15px;
+  font-size: 22px;
   background: black;
 }
 
-#nowPlaying {
-  margin-top: 8px;
-  color: #aaa;
+.container {
+  display: flex;
+  height: 90vh;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
+.sidebar {
+  width: 30%;
+  overflow-y: auto;
+  border-right: 1px solid #333;
   padding: 10px;
+}
+
+.player {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+video {
+  width: 95%;
+  height: 90%;
+  background: black;
 }
 
 .channel {
-  background: #1a1a1a;
-  padding: 10px;
-  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin: 5px 0;
+  background: #1c1c1c;
   cursor: pointer;
-  text-align: center;
-  transition: 0.2s;
-}
-
-.channel:hover {
-  background: #333;
-  transform: scale(1.05);
 }
 
 .channel img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-
-.channel p {
-  font-size: 12px;
-  margin-top: 5px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
 }
