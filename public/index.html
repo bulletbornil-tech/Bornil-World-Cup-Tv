@@ -4,25 +4,32 @@
   <title>Bornil World Cup TV</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="header">
-    Bornil World Cup TV
+<div class="header">
+  <h1>🔥 BORNIL WORLD CUP TV 🔥</h1>
+  <p>Live Sports Streaming Platform</p>
+</div>
+
+<div class="search">
+  <input type="text" placeholder="Search channel..." 
+         oninput="searchChannel(this.value)">
+</div>
+
+<div class="container">
+
+  <div class="channels"></div>
+
+  <div class="player">
+    <video id="video" controls></video>
   </div>
 
-  <div class="container">
+</div>
 
-    <div class="sidebar">
-      <h3>Select Your Channel</h3>
-      <div id="channelList"></div>
-    </div>
+<!-- HLS LIBRARY -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="app.js"></script>
 
-    <div class="player">
-      <video id="videoPlayer" controls autoplay></video>
-    </div>
-
-  </div>
-
-  <script src="app.js"></script>
 </body>
 </html>
