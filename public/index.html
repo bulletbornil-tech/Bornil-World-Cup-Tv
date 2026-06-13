@@ -1,28 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>IPTV Render Player</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bornil World Cup TV</title>
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- HLS player support -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 
 <body>
 
-<div class="container">
+  <header>
+    <h1>🏆 Bornil World Cup TV</h1>
+    <input type="text" id="search" placeholder="Search channel..."/>
+  </header>
 
-  <div class="sidebar">
-    <h2>📺 Channels</h2>
-    <div id="list"></div>
-  </div>
+  <main>
 
-  <div class="player">
-    <video id="video" controls autoplay></video>
-    <h3 id="title">Select Channel</h3>
-  </div>
+    <section class="player-section">
+      <video id="videoPlayer" controls autoplay></video>
+      <div id="nowPlaying">Select a channel</div>
+    </section>
 
-</div>
+    <section id="channelList" class="grid"></section>
 
-<script src="app.js"></script>
+  </main>
 
+  <script src="app.js"></script>
 </body>
 </html>
