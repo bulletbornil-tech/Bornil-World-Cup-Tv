@@ -1,33 +1,75 @@
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Bornil World Cup TV</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0c0c10;
+  color: white;
+}
 
-<body>
+/* HEADER */
+header {
+  text-align: center;
+  padding: 15px;
+  background: linear-gradient(90deg, #ff0000, #ff4d4d);
+}
 
-<header>
-  <h1>🔥 BORNIL WORLD CUP TV 🔥</h1>
-  <p>Live Sports Streaming</p>
-</header>
+header h1 {
+  margin: 0;
+  font-size: 22px;
+}
 
-<!-- 🔥 VIDEO PLAYER TOP -->
-<div class="player-box">
-  <video id="video" controls></video>
-</div>
+/* PLAYER (NORMAL SIZE) */
+.player-box {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+}
 
-<!-- SEARCH -->
-<div class="search">
-  <input type="text" placeholder="Search channel..." oninput="searchChannel(this.value)">
-</div>
+video {
+  width: 100%;
+  max-width: 700px;   /* NORMAL SIZE FIX */
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  background: black;
+}
 
-<!-- CHANNEL LIST BELOW -->
-<div class="channels" id="channels"></div>
+/* SEARCH */
+.search {
+  text-align: center;
+  margin: 10px;
+}
 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="app.js"></script>
+.search input {
+  width: 80%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
 
-</body>
-</html>
+/* CHANNEL GRID */
+.channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+/* CHANNEL CARD */
+.channel {
+  background: #1a1a1a;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.channel:hover {
+  background: #333;
+  transform: scale(1.03);
+}
+
+.channel img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
