@@ -1,15 +1,26 @@
 let channels = [];
 
 async function loadChannels() {
-  const res = await fetch("/api/channels");
-  channels = await res.json();
+  try {
+    const res = await fetch("/channels.json"); // 🔥 FIXED PATH
 
-  renderChannels(channels);
+    if (!res.ok) {
+      throw new Error("HTTP error " + res.status);
+    }
+
+    channels = await res.json();
+    renderChannels(channels);
+
+  } catch (err) {
+    console.log(err);
+    document.querySelector(".channels").innerHTML =
+      "❌ Channels load failed (check console)";
+  }
 }
 
 function renderChannels(list) {
   const box = document.querySelector(".channels");
-  box.innerHTML = "";
+  box.innerHTML = "<h3>Select Channel</h3>";
 
   list.forEach(ch => {
     const div = document.createElement("div");
@@ -26,20 +37,10 @@ function renderChannels(list) {
   });
 }
 
-/* SEARCH */
-function searchChannel(value) {
-  const filtered = channels.filter(ch =>
-    ch.name.toLowerCase().includes(value.toLowerCase())
-  );
-
-  renderChannels(filtered);
-}
-
-/* PLAYER (HLS FIX) */
 function playChannel(url) {
   const video = document.getElementById("video");
 
-  if (Hls.isSupported()) {
+  if (window.Hls && Hls.isSupported()) {
     if (window.hls) window.hls.destroy();
 
     const hls = new Hls();
@@ -47,12 +48,11 @@ function playChannel(url) {
 
     hls.loadSource(url);
     hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      video.play();
-    });
   } else {
     video.src = url;
   }
+
+  video.play();
 }
 
 window.onload = loadChannels;
