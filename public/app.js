@@ -1,60 +1,27 @@
+const list = document.getElementById("channelList");
 const video = document.getElementById("videoPlayer");
-const channelList = document.getElementById("channelList");
-const nowPlaying = document.getElementById("nowPlaying");
-const search = document.getElementById("search");
 
-let channels = [];
-
-// Load JSON
-fetch("channels.json")
+fetch("/channels.json")
   .then(res => res.json())
   .then(data => {
-    channels = data;
-    renderChannels(channels);
-  });
+    data.forEach(channel => {
+      const div = document.createElement("div");
+      div.className = "channel";
 
-// Render channels
-function renderChannels(list) {
-  channelList.innerHTML = "";
+      div.innerHTML = `
+        <img src="${channel.logo}" />
+        <span>${channel.name}</span>
+      `;
 
-  list.forEach(ch => {
-    const div = document.createElement("div");
-    div.className = "channel";
+      div.onclick = () => {
+        video.src = channel.stream_url;
+        video.play();
+      };
 
-    div.innerHTML = `
-      <img src="${ch.logo}" />
-      <p>${ch.name}</p>
-    `;
-
-    div.onclick = () => playChannel(ch);
-
-    channelList.appendChild(div);
-  });
-}
-
-// Play channel (HLS fix)
-function playChannel(channel) {
-  nowPlaying.innerText = "Playing: " + channel.name;
-
-  if (Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(channel.stream_url);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, function () {
-      video.play();
+      list.appendChild(div);
     });
-  }
-  else if (video.canPlayType("application/vnd.apple.mpegurl")) {
-    video.src = channel.stream_url;
-    video.play();
-  }
-}
-
-// Search filter
-search.addEventListener("input", () => {
-  const value = search.value.toLowerCase();
-  const filtered = channels.filter(ch =>
-    ch.name.toLowerCase().includes(value)
-  );
-  renderChannels(filtered);
-});
+  })
+  .catch(err => {
+    list.innerHTML = "Channels load failed!";
+    console.log(err);
+  });
