@@ -1,26 +1,14 @@
 let channels = [];
 
 async function loadChannels() {
-  try {
-    const res = await fetch("/channels.json"); // 🔥 FIXED PATH
-
-    if (!res.ok) {
-      throw new Error("HTTP error " + res.status);
-    }
-
-    channels = await res.json();
-    renderChannels(channels);
-
-  } catch (err) {
-    console.log(err);
-    document.querySelector(".channels").innerHTML =
-      "❌ Channels load failed (check console)";
-  }
+  const res = await fetch("/channels.json");
+  channels = await res.json();
+  renderChannels(channels);
 }
 
 function renderChannels(list) {
-  const box = document.querySelector(".channels");
-  box.innerHTML = "<h3>Select Channel</h3>";
+  const box = document.getElementById("channels");
+  box.innerHTML = "";
 
   list.forEach(ch => {
     const div = document.createElement("div");
@@ -35,6 +23,13 @@ function renderChannels(list) {
 
     box.appendChild(div);
   });
+}
+
+function searchChannel(value) {
+  const filtered = channels.filter(ch =>
+    ch.name.toLowerCase().includes(value.toLowerCase())
+  );
+  renderChannels(filtered);
 }
 
 function playChannel(url) {
